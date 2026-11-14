@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StandartPelayananController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+// standar pelayanan
+Route::get('/standart-pelayanan', [StandartPelayananController::class, 'index']);
+Route::get('/standart-pelayanan/{id}', [StandartPelayananController::class, 'show']);
+Route::post('/standart-pelayanan', [StandartPelayananController::class, 'create']);
+Route::put('/standart-pelayanan/{id}', [StandartPelayananController::class, 'update']);
+Route::delete('/standart-pelayanan/{id}', [StandartPelayananController::class, 'destroy']);

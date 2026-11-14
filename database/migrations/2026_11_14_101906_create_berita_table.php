@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('berita', function (Blueprint $table) {
             $table->id();
+            $table->string('judul');
+            $table->text('isi');
+            $table->string('foto')->nullable();
+            $table->string('penulis');
+            $table->string('status');
             $table->timestamps();
         });
     }
