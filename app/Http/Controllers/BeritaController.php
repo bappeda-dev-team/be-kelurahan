@@ -43,7 +43,7 @@ class BeritaController extends Controller
 
     public function create(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'judul' => 'required|string|max:255',
             'isi' => 'required|string',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
@@ -51,27 +51,31 @@ class BeritaController extends Controller
             'status' => 'required|string|max:255',
         ]);
 
-        $foto = $request->file('foto')->store('profil-berita', 'public');
+        $foto = null;
+
+        if ($request->hasFile('foto')) {
+            $foto = $request->file('foto')->store('profil-berita', 'public');
+        }
 
         $data = BeritaModel::create([
-            'judul' => $request->judul,
-            'isi' => $request->isi,
+            'judul' => $validated['judul'],
+            'isi' => $validated['isi'],
             'foto' => $foto,
-            'penulis' => $request->penulis,
-            'status' => $request->status,
+            'penulis' => $validated['penulis'],
+            'status' => $validated['status'],
         ]);
 
         return response()->json([
             'success' => true,
             'message' => 'Berita berhasil ditambahkan',
             'data' => $data,
-            'foto_url' => asset('storage/' . $foto),
+            'foto_url' => $foto ? asset('storage/' . $foto) : null,
         ], 201);
     }
 
     public function update(Request $request, int $id)
     {
-        $request->validate([
+        $validated = $request->validate([
             'judul' => 'required|string|max:255',
             'isi' => 'required|string',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
@@ -79,23 +83,27 @@ class BeritaController extends Controller
             'status' => 'required|string|max:255',
         ]);
 
-        $foto = $request->file('foto')->store('profil-berita', 'public');
+        $foto = null;
+
+        if ($request->hasFile('foto')) {
+            $foto = $request->file('foto')->store('profil-berita', 'public');
+        }
 
         $standar = BeritaModel::findOrFail($id);
 
         $standar->update([
-            'judul' => $request->judul,
-            'isi' => $request->isi,
+            'judul' => $validated['judul'],
+            'isi' => $validated['isi'],
             'foto' => $foto,
-            'penulis' => $request->penulis,
-            'status' => $request->status,
+            'penulis' => $validated['penulis'],
+            'status' => $validated['status'],
         ]);
 
         return response()->json([
             'success' => true,
             'message' => 'Berita berhasil diupdate',
             'data' => $standar,
-            'foto_url' => asset('storage/' . $foto),
+            'foto_url' => $foto ? asset('storage/' . $foto) : null,
         ], 200);
     }
 
