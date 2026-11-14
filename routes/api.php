@@ -2,6 +2,7 @@
 
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\StandartPelayananController;
 
 /*
@@ -18,6 +19,13 @@ use App\Http\Controllers\StandartPelayananController;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+// berita
+Route::get('/berita', [BeritaController::class, 'index']);
+Route::get('/berita/{id}', [BeritaController::class, 'show']);
+Route::post('/berita', [BeritaController::class, 'create']);
+Route::put('/berita/{id}', [BeritaController::class, 'update']);
+Route::delete('/berita/{id}', [BeritaController::class, 'destroy']);
 
 // standar pelayanan
 Route::get('/standart-pelayanan', [StandartPelayananController::class, 'index']);

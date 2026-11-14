@@ -42,7 +42,7 @@ class StandartPelayananController extends Controller
         $data = StandartPelayananModel::create([
             'persyaratan' => $request->persyaratan,
             'tata_cara' => $request->tata_cara,
-            'waktu_pelayanan' => $request->waktu_pelayanan,
+            'waktu_penyelesaian' => $request->waktu_penyelesaian,
             'biaya' => $request->biaya,
             'produk_layanan' => $request->produk_layanan,
             'pengelolaan_pengaduan' => $request->pengelolaan_pengaduan,
@@ -71,7 +71,7 @@ class StandartPelayananController extends Controller
         $standar->update([
             'persyaratan' => $request->persyaratan,
             'tata_cara' => $request->tata_cara,
-            'waktu_pelayanan' => $request->waktu_pelayanan,
+            'waktu_penyelesaian' => $request->waktu_penyelesaian,
             'biaya' => $request->biaya,
             'produk_layanan' => $request->produk_layanan,
             'pengelolaan_pengaduan' => $request->pengelolaan_pengaduan,
